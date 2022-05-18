@@ -35,7 +35,7 @@ async function run() {
             res.send(result);
         });
 
-        // stock update api 
+        // text update api 
         app.put('/list/:id', async (req, res) => {
             const id = req.params.id;
             const strikeText = req.body;
