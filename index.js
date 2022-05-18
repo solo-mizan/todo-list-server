@@ -35,6 +35,22 @@ async function run() {
             res.send(result);
         });
 
+        // stock update api 
+        app.put('/list/:id', async (req, res) => {
+            const id = req.params.id;
+            const strikeText = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true }
+            const updateDocument = {
+                $set: {
+                    name: strikeText.name,
+                    description: strikeText.description
+                },
+            };
+            const result = await todoCollection.updateOne(filter, updateDocument, options);
+            res.send(result);
+        });
+
         // delete single todo item
         app.delete('/list/:id', async (req, res) => {
             const id = req.params.id;
