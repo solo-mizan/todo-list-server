@@ -19,7 +19,7 @@ async function run() {
         await client.connect();
         const todoCollection = client.db('todo').collection('list');
 
-        // get todo list
+        // get all todo list
         app.get('/list', async (req, res) => {
             const query = {};
             const cursor = todoCollection.find(query);
@@ -35,8 +35,8 @@ async function run() {
             res.send(result);
         });
 
-        // delete single item
-        app.delete('/item/:id', async (req, res) => {
+        // delete single todo item
+        app.delete('/list/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await todoCollection.deleteOne(query);
