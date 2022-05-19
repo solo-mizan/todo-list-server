@@ -35,16 +35,15 @@ async function run() {
             res.send(result);
         });
 
-        // text update api 
+        // isComplete update api 
         app.put('/list/:id', async (req, res) => {
             const id = req.params.id;
-            const strikeText = req.body;
+            const data = req.body;
             const filter = { _id: ObjectId(id) };
             const options = { upsert: true }
             const updateDocument = {
                 $set: {
-                    name: strikeText.name,
-                    description: strikeText.description
+                    isComplete: data.isComplete
                 },
             };
             const result = await todoCollection.updateOne(filter, updateDocument, options);
